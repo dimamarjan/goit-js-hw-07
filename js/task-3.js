@@ -16,15 +16,15 @@ const images = [
   },
 ];
 
-const mainGalery = document.querySelector("#gallery");
-mainGalery.classList.add("gallery");
+const mainGallery = document.querySelector("#gallery");
+mainGallery.classList.add("gallery");
 
-const galeryElements = images.map((element) => {
-  const galeryElementLi = `<li><img src="${element.url}" alt="${element.alt}"> </li>`;
-  return galeryElementLi;
+const galleryElements = images.map((element) => {
+  const galleryElementLi = `<li><img src="${element.url}" alt="${element.alt}"> </li>`;
+  return galleryElementLi;
 });
 
-mainGalery.insertAdjacentHTML("afterbegin", galeryElements.join(""));
+mainGallery.insertAdjacentHTML("afterbegin", galleryElements.join(""));
 
-const galeryItem = document.querySelectorAll("img");
-galeryItem.forEach((element) => element.classList.add("galery-item"));
+const galleryItem = document.querySelectorAll("img");
+galleryItem.forEach((element) => element.classList.add("gallery-item"));

@@ -1,15 +1,9 @@
-const allCattegies = document.querySelector("#categories");
+const mainEl = document.querySelector("#categories");
+const categoryEl = document.querySelectorAll(".item");
 
-const liItem = document.getElementsByTagName("h2");
+console.log(`В списке ${categoryEl.length} категории.`);
 
-const allItems = document.querySelectorAll(".item");
-
-for (let item = 0; liItem.length > item; item++) {
-  console.log(liItem[item].textContent);
-}
-
-console.log(liItem);
-
-// console.log(allItems);
-
-// allItems.forEach((item) => console.log(item));
+categoryEl.forEach((elem) => {
+  console.log(`Категория: ${elem.querySelector("h2").textContent}`);
+  console.log(`Количество элементов: ${elem.querySelectorAll("li").length}`);
+});

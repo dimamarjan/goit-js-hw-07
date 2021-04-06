@@ -9,7 +9,13 @@ controlPanel.style.marginBottom = "10px";
 const lasElemArry = (arr) => arr[arr.length - 1];
 
 function createBoxes(amount) {
-  let blocksContainer = [{ width: 30, height: 30, color: "red" }];
+  let blocksContainer = [
+    {
+      width: 30,
+      height: 30,
+      color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
+    },
+  ];
   if (amount === 1) return blocksContainer;
   for (let i = 0; amount - 1 > i; i++) {
     const widthBlock = lasElemArry(blocksContainer).width + 10;

@@ -6,7 +6,7 @@
 
 const btnIncrease = document.querySelector("button[data-action=increment]");
 const btnDecrease = document.querySelector("button[data-action=decrement]");
-const countField = document.querySelector("#value");
+const countField = document.querySelector("div>span");
 
 btnIncrease.addEventListener("click", () => {
   return (countField.textContent = parseInt(countField.textContent) + 1);

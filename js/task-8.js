@@ -4,55 +4,72 @@ const destroyBtn = document.querySelector("button[data-action='destroy'");
 const controlPanel = document.querySelector("#controls");
 const blocksSection = document.querySelector("#boxes");
 
+let boxContainer = [];
+let boxesDivArray = [];
+
 controlPanel.style.marginBottom = "10px";
 
 const lasElemArry = (arr) => arr[arr.length - 1];
 
+function Element(width = 0, height = 0, color = 0) {
+  this.width = width;
+  this.height = height;
+  this.color = color;
+}
+
+const firstArrayBox = [
+  new Element(30, 30, "#" + (((1 << 24) * Math.random()) | 0).toString(16)),
+];
+
 function createBoxes(amount) {
-  let blocksContainer = [
-    {
-      width: 30,
-      height: 30,
-      color: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
-    },
-  ];
-  if (amount === 1) return blocksContainer;
-  for (let i = 0; amount - 1 > i; i++) {
-    const widthBlock = lasElemArry(blocksContainer).width + 10;
-    const heightBlock = lasElemArry(blocksContainer).height + 10;
-    const colorBlock = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
-    blocksContainer.push({
-      width: widthBlock,
-      height: heightBlock,
-      color: colorBlock,
-    });
+  let newElementArray = [];
+  let tempArrayElements = [];
+  if (boxContainer.length === 0) {
+    tempArrayElements = new Array(amount).fill(
+      new Element(20, 20, "#" + (((1 << 24) * Math.random()) | 0).toString(16))
+    );
+  } else {
+    tempArrayElements = new Array(amount).fill(
+      new Element(
+        lasElemArry(boxContainer).width,
+        lasElemArry(boxContainer).height
+      )
+    );
   }
-  return blocksContainer;
+  tempArrayElements.forEach((element, index) => {
+    newElementArray.push(
+      new Element(
+        element.width + (index + 1) * 10,
+        element.height + (index + 1) * 10,
+        "#" + (((1 << 24) * Math.random()) | 0).toString(16)
+      )
+    );
+  });
+  boxContainer.push(...newElementArray);
+  return (boxesDivArray = newElementArray);
 }
 
 function destroyBoxes() {
+  boxContainer = [];
   while (blocksSection.firstChild) {
     blocksSection.removeChild(blocksSection.firstChild);
   }
 }
 
 renderBtn.addEventListener("click", () => {
-  destroyBoxes();
+  let boxes = [];
   if (inputField.value > 0) {
-    if (blocksSection.firstChild) {
-      destroyBoxes();
-    }
-    let boxesArr = [];
-    const boxes = createBoxes(inputField.value);
-    boxes.forEach((element) => {
+    createBoxes(parseInt(inputField.value));
+    boxesDivArray.forEach((element) => {
       const box = document.createElement("div");
       box.style.display = "block";
       box.style.width = `${element.width}px`;
       box.style.height = `${element.height}px`;
+      box.style.border = "0.5px solid black";
       box.style.backgroundColor = element.color;
-      boxesArr.push(box);
+      boxes.push(box);
     });
-    blocksSection.append(...boxesArr);
+    blocksSection.append(...boxes);
   }
 });
 

@@ -8,10 +8,14 @@ const btnIncrease = document.querySelector("button[data-action=increment]");
 const btnDecrease = document.querySelector("button[data-action=decrement]");
 const countField = document.querySelector("div>span");
 
+let counterValue = 0;
+
 btnIncrease.addEventListener("click", () => {
-  return (countField.textContent = parseInt(countField.textContent) + 1);
+  counterValue += 1;
+  return (countField.textContent = counterValue);
 });
 
 btnDecrease.addEventListener("click", () => {
-  return (countField.textContent = parseInt(countField.textContent) - 1);
+  counterValue -= 1;
+  return (countField.textContent = counterValue);
 });

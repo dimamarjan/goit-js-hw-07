@@ -8,10 +8,18 @@
 
 const inputField = document.querySelector("#validation-input");
 
+function classListChecker(valueAdd, valueRem) {
+  inputField.classList.add(valueAdd);
+  if (inputField.classList.contains(valueRem)) {
+    inputField.classList.remove(valueRem);
+  }
+}
+
 inputField.addEventListener("blur", () => {
   if (inputField.value.length === parseInt(inputField.dataset.length)) {
-    inputField.classList = "valid";
-  } else {
-    inputField.classList.add("invalid");
+    classListChecker("valid", "invalid");
+  }
+  if (inputField.value.length !== parseInt(inputField.dataset.length)) {
+    classListChecker("invalid", "valid");
   }
 });
